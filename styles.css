@@ -5,3 +5,53 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 80px 1fr 50px;
+}
+
+.header {
+    background-color: rgb(31, 31, 31);
+    color: white;
+    padding: 0 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchContainer {
+    background-color: white;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.searchIcon {
+    height: 20px;
+}
+
+.search,
+.submitBtn {
+    font-size: 1rem;
+    padding: 3px;
+}
+
+.main {
+    background-color: rgb(235, 235, 235);
+}
+
+.footer {
+    background-color: rgb(31, 31, 31);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
