@@ -1,5 +1,7 @@
 /* Stylesheet for Weather App */
 
+/* General Styling */
+
 * {
     padding: 0;
     margin: 0;
@@ -11,6 +13,8 @@ body {
     display: grid;
     grid-template-rows: 80px 1fr 50px;
 }
+
+/* Header Section */
 
 .header {
     background-color: rgb(31, 31, 31);
@@ -43,9 +47,28 @@ body {
     padding: 3px;
 }
 
+/* Main Section */
+
 .main {
     background-color: rgb(235, 235, 235);
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
 }
+
+.currentWeather,
+.airQuality,
+.forecast,
+.weatherMap {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Footer Section */
 
 .footer {
     background-color: rgb(31, 31, 31);

@@ -21,8 +21,27 @@ function processWeather(jsonData) {
 
     console.log(importantData);
 
+    populateCurrentWeather(importantData);
+
     // This should return a weather object
     // split into individual sections????
+}
+
+function populateCurrentWeather(data) {
+    const currentWeatherDetails = document.querySelector(
+        ".currentWeatherDetails"
+    );
+
+    currentWeatherDetails.innerHTML = "";
+
+    for (const property in data) {
+        const weatherItem = document.createElement("div");
+        weatherItem.classList.add("weatherItem");
+
+        weatherItem.innerHTML = `${property}: ${data[property]}`;
+
+        currentWeatherDetails.appendChild(weatherItem);
+    }
 }
 
 const submitBtn = document.querySelector(".submitBtn");
