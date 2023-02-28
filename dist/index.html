@@ -8,5 +8,38 @@
         <link rel="stylesheet" href="styles.css" />
         <script src="main.js" defer></script>
     </head>
-    <body></body>
+    <body>
+        <header class="header">
+            <h1>The Weather App</h1>
+            <div class="searchContainer">
+                <img src="assets/find.png" alt="Search" class="searchIcon" />
+                <form action="post" id="searchForm">
+                    <div>
+                        <label for="search"></label>
+                        <input
+                            type="text"
+                            id="search"
+                            class="search"
+                            placeholder="City"
+                            required
+                        />
+                    </div>
+                </form>
+                <div>
+                    <button type="submit" form="searchForm" class="submitBtn">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="currentWeather"></div>
+            <div class="airQuality"></div>
+            <div class="forecast"></div>
+            <div class="weatherMap"></div>
+        </main>
+        <footer class="footer">
+            <p>Developed by Patrick Brebner</p>
+        </footer>
+    </body>
 </html>
