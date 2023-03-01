@@ -1,47 +1,46 @@
-// Source script for Weather App
+// Source index script for Weather App
 
-async function getWeather(location) {
-    const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=69a0fe9d89aa3c562c09a50fbd505046`
-    );
+import { getWeather } from "./apiFunctions";
+import { populateCurrentWeather } from "./domFunctions";
 
-    const weatherData = await response.json();
-    console.log(weatherData);
-    processWeather(weatherData);
-}
+async function processWeather(location) {
+    // Need to add try/catch to handle errors
+    const weatherData = await getWeather(location);
 
-function processWeather(jsonData) {
-    importantData = {};
+    let importantData = {};
 
-    importantData.location = jsonData.name;
-    importantData.temp = jsonData.main.temp;
-    importantData.humidity = jsonData.main.humidity;
-    importantData.tempMax = jsonData.main.temp_max;
-    importantData.tempMin = jsonData.main.temp_min;
+    importantData.location = weatherData.name;
+    importantData.temperature = weatherData.main.temp;
+    importantData.humidity = weatherData.main.humidity;
+    importantData.tempMax = weatherData.main.temp_max;
+    importantData.tempMin = weatherData.main.temp_min;
 
     console.log(importantData);
-
-    populateCurrentWeather(importantData);
-
-    // This should return a weather object
-    // split into individual sections????
+    return importantData;
 }
 
-function populateCurrentWeather(data) {
-    const currentWeatherDetails = document.querySelector(
-        ".currentWeatherDetails"
-    );
+async function processAirQuality() {
+    // Gets data from air quality apiFunctions function and gathers relavent info for display
+}
 
-    currentWeatherDetails.innerHTML = "";
+async function processForecast() {
+    // Gets data from forecast apiFunctions function and gathers relavent info for display
+}
 
-    for (const property in data) {
-        const weatherItem = document.createElement("div");
-        weatherItem.classList.add("weatherItem");
+async function processMap() {
+    // Gets data from map apiFunctions function and gathers relavent info for display
+}
 
-        weatherItem.innerHTML = `${property}: ${data[property]}`;
+async function loadPage(location) {
+    // Add some visual indication that we're waiting for the data (promise.all) before it gets displayed (Map would likey take the longest to display)
+    //Could add a class to change the display prior to promise.all showing that it's loading, and remove it to show data if successful or display a no results found page if error
 
-        currentWeatherDetails.appendChild(weatherItem);
-    }
+    // Use a promise.all to wait for all processing to complete before displaying data
+
+    Promise.all([processWeather(location)]).then((data) => {
+        //console.log(data);
+        populateCurrentWeather(data[0]);
+    });
 }
 
 const submitBtn = document.querySelector(".submitBtn");
@@ -50,9 +49,9 @@ submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
     const search = document.querySelector(".search");
 
-    getWeather(search.value);
+    loadPage(search.value);
 
     search.value = "";
 });
 
-getWeather("London");
+loadPage("London");
