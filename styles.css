@@ -26,6 +26,12 @@ body {
     align-items: center;
 }
 
+.heading {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
 .searchContainer {
     background-color: white;
     height: fit-content;
@@ -45,6 +51,17 @@ body {
 .submitBtn {
     font-size: 1rem;
     padding: 3px;
+
+    border: none;
+    background-color: white;
+}
+
+.search:focus {
+    outline: none;
+}
+
+.submitBtn:hover {
+    cursor: pointer;
 }
 
 /* Main Section */
