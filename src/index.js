@@ -11,11 +11,13 @@ async function processWeather(location) {
 
     let importantData = {};
 
-    importantData.location = weatherData.name;
-    importantData.temperature = weatherData.main.temp;
-    importantData.humidity = weatherData.main.humidity;
-    importantData.tempMax = weatherData.main.temp_max;
-    importantData.tempMin = weatherData.main.temp_min;
+    importantData.Location = weatherData.name;
+    importantData.Temperature = weatherData.main.temp;
+    importantData["Feels Like"] = weatherData.main.feels_like;
+    importantData.Humidity = weatherData.main.humidity;
+    importantData.Windspeed = weatherData.wind.speed;
+
+    importantData.Condition = weatherData.weather[0].description;
 
     // Format this object better
     // Object Constructor?
