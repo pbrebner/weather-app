@@ -6,7 +6,12 @@ function populateLocation(data) {
 
     for (const property in data) {
         if (property == "Location") {
-            location.innerHTML = `${data[property]}`;
+            let regionNames = new Intl.DisplayNames(["en"], {
+                type: "region",
+            });
+            let country = regionNames.of(`${data[property][1]}`);
+
+            location.innerHTML = `${data[property][0]}, ${country}`;
         }
     }
 }
@@ -42,9 +47,19 @@ function populateCurrentWeather(data) {
             const weatherItemProperty = document.createElement("div");
             const weatherItemData = document.createElement("div");
 
-            weatherItemProperty.innerHTML = `${property}`;
-            weatherItemData.innerHTML = `${data[property]}`;
+            if (property == "Location") {
+                weatherItemProperty.innerHTML = `${property}`;
 
+                let regionNames = new Intl.DisplayNames(["en"], {
+                    type: "region",
+                });
+                let country = regionNames.of(`${data[property][1]}`);
+
+                weatherItemData.innerHTML = `${data[property][0]}, ${country}`;
+            } else {
+                weatherItemProperty.innerHTML = `${property}`;
+                weatherItemData.innerHTML = `${data[property]}`;
+            }
             weatherItem.appendChild(weatherItemProperty);
             weatherItem.appendChild(weatherItemData);
 

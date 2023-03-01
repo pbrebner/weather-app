@@ -11,7 +11,7 @@ async function processWeather(location) {
 
     let importantData = {};
 
-    importantData.Location = weatherData.name;
+    importantData.Location = [weatherData.name, weatherData.sys.country];
     importantData.Temperature = weatherData.main.temp;
     importantData["Feels Like"] = weatherData.main.feels_like;
     importantData.Humidity = weatherData.main.humidity;
