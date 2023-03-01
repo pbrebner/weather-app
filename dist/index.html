@@ -33,21 +33,35 @@
             </div>
         </header>
         <main class="main">
-            <div class="currentWeather">
-                <p>Current Weather</p>
-                <div class="currentWeatherDisplay"></div>
-                <div class="currentWeatherDetails"></div>
+            <div class="currentWeatherContainer conditionContainer">
+                <h2>Current Weather</h2>
+                <div class="currentWeather">
+                    <div class="currentWeatherDisplay">
+                        <div class="currentCondition">
+                            <img
+                                src="assets/cloud.png"
+                                alt="Weather Icon"
+                                class="currentConditionIcon"
+                            />
+                            <div class="currentConditionName">Cloudy</div>
+                        </div>
+                        <div class="currentTemp"></div>
+                    </div>
+                    <div class="currentWeatherDetails"></div>
+                </div>
             </div>
-            <div class="airQuality">
-                <p>Current Air Quality</p>
-                <div></div>
-                <div></div>
+            <div class="airQualityContainer conditionContainer">
+                <h2>Current Air Quality</h2>
+                <div>
+                    <div class="airQualityDisplay"></div>
+                    <div class="airQualityDetails"></div>
+                </div>
             </div>
-            <div class="forecast">
-                <p>Forecast</p>
+            <div class="forecastContainer conditionContainer">
+                <h2>Forecast</h2>
             </div>
-            <div class="weatherMap">
-                <p>Map</p>
+            <div class="weatherMapContainer conditionContainer">
+                <h2>Map</h2>
             </div>
         </main>
         <footer class="footer">

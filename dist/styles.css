@@ -11,7 +11,7 @@
 body {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 80px 1fr 50px;
+    grid-template-rows: 80px 1fr 40px;
 }
 
 /* Header Section */
@@ -59,13 +59,60 @@ body {
     align-items: center;
 }
 
-.currentWeather,
-.airQuality,
-.forecast,
-.weatherMap {
+.conditionContainer {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
+
+    /*Should add some flexibilty to these */
+    min-width: 800px;
+    min-height: 300px;
+
+    display: grid;
+    grid-template-rows: 30px 1fr;
+}
+
+.currentWeather {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.currentWeatherDisplay {
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.currentCondition {
+    display: grid;
+    justify-items: center;
+}
+
+.currentConditionIcon {
+    height: 100px;
+}
+
+.currentTemp {
+    font-size: 3rem;
+}
+
+.currentWeatherDetails {
+    font-size: 1.2rem;
+    display: grid;
+    gap: 3px;
+}
+
+.currentWeatherDetails hr {
+    height: 1px;
+}
+
+.currentWeatherItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
 }
 
 /* Footer Section */
