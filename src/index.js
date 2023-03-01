@@ -1,7 +1,7 @@
 // Source index script for Weather App
 
 import { getWeather, getAirQuality, getForecast } from "./apiFunctions";
-import { populateCurrentWeather } from "./domFunctions";
+import { populateLocation, populateCurrentWeather } from "./domFunctions";
 
 async function processWeather(location) {
     // Need to add try/catch to handle errors
@@ -55,6 +55,7 @@ async function loadPage(location) {
         processForecast(location),
     ]).then((data) => {
         //console.log(data);
+        populateLocation(data[0]);
         populateCurrentWeather(data[0]);
     });
 }

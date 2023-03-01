@@ -1,5 +1,16 @@
 // Functions to create and display DOM elements
 
+function populateLocation(data) {
+    const location = document.querySelector(".location");
+    location.innerHTML = "";
+
+    for (const property in data) {
+        if (property == "Location") {
+            location.innerHTML = `${data[property]}`;
+        }
+    }
+}
+
 function populateCurrentWeather(data) {
     const currentWeatherDetails = document.querySelector(
         ".currentWeatherDetails"
@@ -43,6 +54,4 @@ function populateCurrentWeather(data) {
     }
 }
 
-function populateLocation() {}
-
-export { populateCurrentWeather };
+export { populateLocation, populateCurrentWeather };
