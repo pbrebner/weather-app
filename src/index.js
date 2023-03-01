@@ -1,11 +1,13 @@
 // Source index script for Weather App
 
-import { getWeather } from "./apiFunctions";
+import { getWeather, getAirQuality, getForecast } from "./apiFunctions";
 import { populateCurrentWeather } from "./domFunctions";
 
 async function processWeather(location) {
     // Need to add try/catch to handle errors
     const weatherData = await getWeather(location);
+
+    console.log(weatherData);
 
     let importantData = {};
 
@@ -15,16 +17,24 @@ async function processWeather(location) {
     importantData.tempMax = weatherData.main.temp_max;
     importantData.tempMin = weatherData.main.temp_min;
 
-    console.log(importantData);
+    // Format this object better
+    // Object Constructor?
+
     return importantData;
 }
 
-async function processAirQuality() {
+async function processAirQuality(location) {
     // Gets data from air quality apiFunctions function and gathers relavent info for display
+
+    const airQualityData = await getAirQuality(location);
+    console.log(airQualityData);
 }
 
-async function processForecast() {
+async function processForecast(location) {
     // Gets data from forecast apiFunctions function and gathers relavent info for display
+
+    const forecastData = await getForecast(location);
+    console.log(forecastData);
 }
 
 async function processMap() {
@@ -37,7 +47,11 @@ async function loadPage(location) {
 
     // Use a promise.all to wait for all processing to complete before displaying data
 
-    Promise.all([processWeather(location)]).then((data) => {
+    Promise.all([
+        processWeather(location),
+        processAirQuality(location),
+        processForecast(location),
+    ]).then((data) => {
         //console.log(data);
         populateCurrentWeather(data[0]);
     });
