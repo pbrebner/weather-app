@@ -1,7 +1,11 @@
 // Source index script for Weather App
 
 import { getWeather, getAirQuality, getForecast } from "./apiFunctions";
-import { populateLocation, populateCurrentWeather } from "./domFunctions";
+import {
+    populateLocation,
+    populateCurrentWeather,
+    populateAirQuality,
+} from "./domFunctions";
 
 async function processWeather(location) {
     // Need to add try/catch to handle errors
@@ -30,6 +34,12 @@ async function processAirQuality(location) {
 
     const airQualityData = await getAirQuality(location);
     console.log(airQualityData);
+
+    let importantData = {};
+
+    importantData.AQI = airQualityData.list[0].main.aqi;
+
+    return importantData;
 }
 
 async function processForecast(location) {
@@ -57,6 +67,7 @@ async function loadPage(location) {
         //console.log(data);
         populateLocation(data[0]);
         populateCurrentWeather(data[0]);
+        populateAirQuality(data[1]);
     });
 }
 

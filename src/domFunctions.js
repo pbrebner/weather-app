@@ -69,4 +69,48 @@ function populateCurrentWeather(data) {
     }
 }
 
-export { populateLocation, populateCurrentWeather };
+function populateAirQuality(data) {
+    const airQualityDisplay = document.querySelector(".airQualityDisplay");
+    const airQualityHeader = document.querySelector(".airQualityHeader");
+    const airQualityPara = document.querySelector(".airQualityPara");
+
+    airQualityDisplay.innerHTML = "";
+    airQualityHeader.innerHTML = "";
+    airQualityPara.innerHTML = "";
+
+    const airQualityDesciptions = {
+        1: [
+            "Excellent",
+            "The air quality is ideal for most individuals; Enjoy your usual outdoor activities.",
+        ],
+        2: [
+            "Fair",
+            "Air quality is fair and is not a concern for the general public. No need to modify your usual outdoor activities unless you experience symptoms such as coughing and throat irritation.",
+        ],
+        3: [
+            "Moderate",
+            "Air quality is moderate and typically safe for the general public; Consider reducing or rescheduling strenuous activities outdoors if you experience symptoms such as coughing and throat irritation.",
+        ],
+        4: [
+            "Poor",
+            "Air quality is poor and precautions should be considered. Reduce or reschedule strenuous activities outdoors. Children and the elderly should also take it easy.",
+        ],
+        5: [
+            "Very Poor",
+            "Air quality is very poor; Avoid strenuous activities outdoors. Children and the elderly should also avoid outdoor physical exertion.",
+        ],
+    };
+
+    for (const property in data) {
+        if (property == "AQI") {
+            airQualityDisplay.innerHTML = `${data[property]} AQI`;
+
+            airQualityHeader.innerHTML =
+                airQualityDesciptions[`${data[property]}`][0];
+            airQualityPara.innerHTML =
+                airQualityDesciptions[`${data[property]}`][1];
+        }
+    }
+}
+
+export { populateLocation, populateCurrentWeather, populateAirQuality };
