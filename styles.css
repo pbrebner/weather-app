@@ -82,8 +82,8 @@ body {
     border-radius: 5px;
 
     /*Should add some flexibilty to these */
-    min-width: 800px;
-    min-height: 300px;
+    width: 800px;
+    height: 300px;
 
     display: grid;
     grid-template-rows: 30px 1fr;
@@ -130,6 +130,34 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+}
+
+.airQuality {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.airQualityDisplay {
+    font-size: 3rem;
+    font-weight: bold;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.airQualityDetails {
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+}
+
+.airQualityHeader {
+    font-size: 1.6rem;
 }
 
 /* Footer Section */
