@@ -1,6 +1,10 @@
 // Functions to create and display DOM elements
 
-import { convertTime, convertWindDirection } from "./utils";
+import {
+    convertTime,
+    convertWindDirection,
+    capitalizeFirstLetters,
+} from "./utils";
 
 function populateLocation(data) {
     const location = document.querySelector(".location");
@@ -39,7 +43,9 @@ function populateCurrentWeather(data) {
             currentTemp.innerHTML = `${data[property]} &#8451`;
             // U+2109 for Fahrenheit
         } else if (property == "Condition") {
-            currentConditionName.innerHTML = `${data[property]}`;
+            currentConditionName.innerHTML = `${capitalizeFirstLetters(
+                data[property]
+            )}`;
             // Update the condition Icon according to name
         } else {
             const weatherItem = document.createElement("div");
