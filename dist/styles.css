@@ -83,7 +83,7 @@ body {
 
     /*Should add some flexibilty to these */
     width: 800px;
-    height: 300px;
+    min-height: 300px;
 
     display: grid;
     grid-template-rows: 30px 1fr;
@@ -134,7 +134,7 @@ body {
 
 .airQuality {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
 }
 
 .airQualityDisplay {
@@ -158,6 +158,80 @@ body {
 
 .airQualityHeader {
     font-size: 1.6rem;
+}
+
+.forecast {
+    display: grid;
+}
+
+.forecastTile {
+    height: 80px;
+    overflow: hidden;
+    border-bottom: 1px solid grey;
+
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    gap: 5px;
+
+    transition: height 0.4s ease-in-out;
+}
+
+.forecastTile.expand {
+    height: 220px;
+}
+
+.forecastTileMain {
+    font-size: 1.2rem;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.forecastTileDisplay {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.forecastIcon {
+    height: 60px;
+}
+
+.expandBtn {
+    font-size: 2rem;
+    background: none;
+    border: none;
+}
+
+.forecastTileSupp {
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.forecastItem {
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.forecastItemProperty {
+    padding-left: 5px;
+}
+
+.forecastItemData {
+    padding-right: 5px;
+    justify-self: end;
+}
+
+.forecastHr {
+    height: 1px;
+    grid-column: 1 / -1;
 }
 
 /* Footer Section */
