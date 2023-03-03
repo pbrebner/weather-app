@@ -1,13 +1,24 @@
 // Utility functions for WeatherApp
 
-function convertTime(hour) {
+function convertTime(hour, minute) {
     // Takes the hour in 24hr time and converts it to 12hr time with AM or PM
     let newTime = "";
 
-    if (hour < 12) {
-        newTime = `${hour % 12 || 12}AM`;
+    if (!minute) {
+        if (hour < 12) {
+            newTime = `${hour % 12 || 12}AM`;
+        } else {
+            newTime = `${hour % 12 || 12}PM`;
+        }
     } else {
-        newTime = `${hour % 12 || 12}PM`;
+        if (minute.toString().length == 1) {
+            minute = "0" + minute;
+        }
+        if (hour < 12) {
+            newTime = `${hour % 12 || 12}:${minute}AM`;
+        } else {
+            newTime = `${hour % 12 || 12}:${minute}PM`;
+        }
     }
 
     return newTime;
