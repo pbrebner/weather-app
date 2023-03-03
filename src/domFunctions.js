@@ -23,6 +23,8 @@ function populateLocation(data) {
 }
 
 function populateCurrentWeather(data) {
+    const currentTime = document.querySelector(".currentTime");
+
     const currentWeatherDetails = document.querySelector(
         ".currentWeatherDetails"
     );
@@ -39,7 +41,15 @@ function populateCurrentWeather(data) {
     currentTemp.innerHTML = "";
 
     for (const property in data) {
-        if (property == "Temperature") {
+        if (property == "Date") {
+            const date = new Date(data[property] * 1000);
+            const hour = date.getHours(date);
+            const minute = date.getMinutes(date);
+
+            const time = convertTime(hour, minute);
+
+            currentTime.innerHTML = time;
+        } else if (property == "Temperature") {
             currentTemp.innerHTML = `${data[property]} &#8451`;
             // U+2109 for Fahrenheit
         } else if (property == "Condition") {
@@ -47,6 +57,7 @@ function populateCurrentWeather(data) {
                 data[property]
             )}`;
             // Update the condition Icon according to name
+            currentConditionIcon.src = "assets/cloud.png";
         } else {
             const weatherItem = document.createElement("div");
             const hr = document.createElement("hr");
