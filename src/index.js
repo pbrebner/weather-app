@@ -5,6 +5,7 @@ import {
     populateLocation,
     populateCurrentWeather,
     populateAirQuality,
+    populateForecast,
 } from "./domFunctions";
 
 async function processWeather(location) {
@@ -47,6 +48,33 @@ async function processForecast(location) {
 
     const forecastData = await getForecast(location);
     console.log(forecastData);
+
+    let importantData = [];
+
+    for (const index in forecastData.list) {
+        importantData[index] = {};
+        importantData[index].Date = forecastData.list[index].dt;
+        importantData[index].Condition =
+            forecastData.list[index].weather[0].description;
+        importantData[index].Temperature = forecastData.list[index].main.temp;
+        importantData[index].Pop = forecastData.list[index].pop;
+
+        importantData[index]["Feels Like"] =
+            forecastData.list[index].main.feels_like;
+        importantData[index].Humidity = forecastData.list[index].main.humidity;
+
+        importantData[index]["Cloud Cover"] =
+            forecastData.list[index].clouds.all;
+        importantData[index].Visibility = forecastData.list[index].visibility;
+
+        importantData[index].Wind = {
+            speed: forecastData.list[index].wind.speed,
+            direction: forecastData.list[index].wind.deg,
+        };
+        importantData[index].Gust = forecastData.list[index].wind.gust;
+    }
+
+    return importantData;
 }
 
 async function processMap() {
@@ -68,6 +96,7 @@ async function loadPage(location) {
         populateLocation(data[0]);
         populateCurrentWeather(data[0]);
         populateAirQuality(data[1]);
+        populateForecast(data[2]);
     });
 }
 

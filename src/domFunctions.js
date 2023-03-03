@@ -1,5 +1,7 @@
 // Functions to create and display DOM elements
 
+import { convertTime, convertWindDirection } from "./utils";
+
 function populateLocation(data) {
     const location = document.querySelector(".location");
     location.innerHTML = "";
@@ -113,4 +115,109 @@ function populateAirQuality(data) {
     }
 }
 
-export { populateLocation, populateCurrentWeather, populateAirQuality };
+function populateForecast(data) {
+    const forecast = document.querySelector(".forecast");
+
+    for (let i = 0; i < 8; i++) {
+        const forecastTile = document.createElement("div");
+        forecastTile.classList.add("forecastTile");
+
+        const forecastTileMain = document.createElement("div");
+        const forecastTileDisplay = document.createElement("div");
+        const forecastTileSupp = document.createElement("div");
+
+        forecastTileMain.classList.add("forecastTileMain");
+        forecastTileDisplay.classList.add("forecastTileDisplay");
+        forecastTileSupp.classList.add("forecastTileSupp");
+
+        let tileData = data[i];
+
+        for (const property in tileData) {
+            if (property == "Date") {
+                let date = new Date(tileData[property] * 1000);
+                let hour = date.getHours(date);
+
+                const time = document.createElement("div");
+                time.innerHTML = convertTime(hour);
+
+                forecastTileMain.appendChild(time);
+            } else if (property == "Condition") {
+                const icon = document.createElement("img");
+                icon.classList.add("forecastIcon");
+
+                icon.src = "assets/cloud.png";
+
+                forecastTileDisplay.appendChild(icon);
+            } else if (property == "Temperature") {
+                const forecastTemp = document.createElement("div");
+
+                forecastTemp.innerHTML = `${tileData[property]} &#8451`;
+
+                forecastTileDisplay.appendChild(forecastTemp);
+                forecastTileMain.appendChild(forecastTileDisplay);
+            } else if (property == "Pop") {
+                const pop = document.createElement("div");
+
+                pop.innerHTML = `${tileData[property]}% pop`;
+
+                forecastTileMain.appendChild(pop);
+            } else {
+                const forecastItem = document.createElement("div");
+                forecastItem.classList.add("forecastItem");
+
+                const hr = document.createElement("hr");
+                hr.classList.add("forecastHr");
+
+                const forecastItemProperty = document.createElement("div");
+                const forecastItemData = document.createElement("div");
+
+                forecastItemProperty.classList.add("forecastItemProperty");
+                forecastItemData.classList.add("forecastItemData");
+
+                if (property == "Wind") {
+                    forecastItemProperty.innerHTML = `${property}`;
+                    forecastItemData.innerHTML = `${
+                        tileData[property].speed
+                    } ${convertWindDirection(tileData[property].direction)}`;
+
+                    forecastItem.appendChild(forecastItemProperty);
+                    forecastItem.appendChild(forecastItemData);
+                    forecastItem.appendChild(hr);
+
+                    forecastTileSupp.appendChild(forecastItem);
+                } else {
+                    forecastItemProperty.innerHTML = `${property}`;
+                    forecastItemData.innerHTML = `${tileData[property]}`;
+                }
+
+                forecastItem.appendChild(forecastItemProperty);
+                forecastItem.appendChild(forecastItemData);
+                forecastItem.appendChild(hr);
+
+                forecastTileSupp.appendChild(forecastItem);
+            }
+        }
+
+        const expandBtn = document.createElement("button");
+        expandBtn.classList.add("expandBtn");
+        expandBtn.innerHTML = "&#8964";
+
+        expandBtn.addEventListener("click", () => {
+            forecastTile.classList.toggle("expand");
+        });
+
+        forecastTileMain.appendChild(expandBtn);
+
+        forecastTile.appendChild(forecastTileMain);
+        forecastTile.appendChild(forecastTileSupp);
+
+        forecast.appendChild(forecastTile);
+    }
+}
+
+export {
+    populateLocation,
+    populateCurrentWeather,
+    populateAirQuality,
+    populateForecast,
+};
