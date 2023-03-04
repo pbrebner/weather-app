@@ -105,7 +105,13 @@ body {
 
 .currentCondition {
     display: grid;
+    grid-template-rows: 60px 1fr 1fr;
     justify-items: center;
+}
+
+.currentTime {
+    font-size: 1.2rem;
+    justify-self: left;
 }
 
 .currentConditionIcon {
