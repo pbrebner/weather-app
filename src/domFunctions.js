@@ -50,7 +50,7 @@ function populateCurrentWeather(data) {
 
             currentTime.innerHTML = time;
         } else if (property == "Temperature") {
-            currentTemp.innerHTML = `${data[property]} &#8451`;
+            currentTemp.innerHTML = `${data[property]}`;
             // U+2109 for Fahrenheit
         } else if (property == "Condition") {
             currentConditionName.innerHTML = `${capitalizeFirstLetters(
@@ -75,6 +75,11 @@ function populateCurrentWeather(data) {
                 let country = regionNames.of(`${data[property][1]}`);
 
                 weatherItemData.innerHTML = `${data[property][0]}, ${country}`;
+            } else if (property == "Wind") {
+                weatherItemProperty.innerHTML = `${property}`;
+                weatherItemData.innerHTML = `${
+                    data[property][0]
+                } ${convertWindDirection(data[property][1])}`;
             } else {
                 weatherItemProperty.innerHTML = `${property}`;
                 weatherItemData.innerHTML = `${data[property]}`;
@@ -134,6 +139,7 @@ function populateAirQuality(data) {
 
 function populateForecast(data) {
     const forecast = document.querySelector(".forecast");
+    forecast.innerHTML = "";
 
     for (let i = 0; i < 8; i++) {
         const forecastTile = document.createElement("div");
@@ -168,14 +174,14 @@ function populateForecast(data) {
             } else if (property == "Temperature") {
                 const forecastTemp = document.createElement("div");
 
-                forecastTemp.innerHTML = `${tileData[property]} &#8451`;
+                forecastTemp.innerHTML = `${tileData[property]}`;
 
                 forecastTileDisplay.appendChild(forecastTemp);
                 forecastTileMain.appendChild(forecastTileDisplay);
             } else if (property == "Pop") {
                 const pop = document.createElement("div");
 
-                pop.innerHTML = `${tileData[property]}% pop`;
+                pop.innerHTML = `${tileData[property]} pop`;
 
                 forecastTileMain.appendChild(pop);
             } else {

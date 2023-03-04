@@ -9,6 +9,7 @@ import {
 } from "./domFunctions";
 
 async function processWeather(location) {
+    // Gets data from get weather apiFunctions function and gathers relavent info for display
     // Need to add try/catch to handle errors
     const weatherData = await getWeather(location);
 
@@ -18,15 +19,28 @@ async function processWeather(location) {
 
     importantData.Location = [weatherData.name, weatherData.sys.country];
     importantData.Date = weatherData.dt;
-    importantData.Temperature = weatherData.main.temp;
-    importantData["Feels Like"] = weatherData.main.feels_like;
-    importantData.Humidity = weatherData.main.humidity;
-    importantData.Windspeed = weatherData.wind.speed;
+    importantData.Temperature = `${weatherData.main.temp} &#8451`;
+    importantData["Feels Like"] = `${weatherData.main.feels_like} &#8451`;
+    importantData.Humidity = `${weatherData.main.humidity} %`;
+    importantData.Wind = [
+        `${Math.round(weatherData.wind.speed * 3.6 * 100) / 100} km/hr`,
+        weatherData.wind.deg,
+    ];
+
+    if (weatherData.wind.gust) {
+        importantData.Gust = `${
+            Math.round(weatherData.wind.gust * 3.6 * 100) / 100
+        } km/hr`;
+    }
+
+    if (weatherData.rain) {
+        importantData.Rain = `${weatherData.rain["1h"]} mm`;
+    }
 
     importantData.Condition = weatherData.weather[0].description;
 
     // Format this object better
-    // Object Constructor?
+    // Object Constructor and create method to convert to different units
 
     return importantData;
 }
@@ -57,22 +71,35 @@ async function processForecast(location) {
         importantData[index].Date = forecastData.list[index].dt;
         importantData[index].Condition =
             forecastData.list[index].weather[0].description;
-        importantData[index].Temperature = forecastData.list[index].main.temp;
-        importantData[index].Pop = forecastData.list[index].pop;
+        importantData[
+            index
+        ].Temperature = `${forecastData.list[index].main.temp} &#8451`;
+        importantData[index].Pop = `${forecastData.list[index].pop * 100} %`;
 
-        importantData[index]["Feels Like"] =
-            forecastData.list[index].main.feels_like;
-        importantData[index].Humidity = forecastData.list[index].main.humidity;
+        importantData[index][
+            "Feels Like"
+        ] = `${forecastData.list[index].main.feels_like} &#8451`;
+        importantData[
+            index
+        ].Humidity = `${forecastData.list[index].main.humidity}%`;
 
-        importantData[index]["Cloud Cover"] =
-            forecastData.list[index].clouds.all;
-        importantData[index].Visibility = forecastData.list[index].visibility;
+        importantData[index][
+            "Cloud Cover"
+        ] = `${forecastData.list[index].clouds.all} %`;
+        importantData[
+            index
+        ].Visibility = `${forecastData.list[index].visibility} km`;
 
         importantData[index].Wind = {
-            speed: forecastData.list[index].wind.speed,
+            speed: `${
+                Math.round(forecastData.list[index].wind.speed * 3.6 * 100) /
+                100
+            } km/hr`,
             direction: forecastData.list[index].wind.deg,
         };
-        importantData[index].Gust = forecastData.list[index].wind.gust;
+        importantData[index].Gust = `${
+            Math.round(forecastData.list[index].wind.gust * 3.6 * 100) / 100
+        } km/hr`;
     }
 
     return importantData;
