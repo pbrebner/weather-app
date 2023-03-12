@@ -42,11 +42,12 @@ function populateCurrentWeather(data) {
 
     for (const property in data) {
         if (property == "Date") {
-            const date = new Date(data[property] * 1000);
-            const hour = date.getHours(date);
-            const minute = date.getMinutes(date);
+            const date = new Date(data[property][0] * 1000);
 
-            const time = convertTime(hour, minute);
+            const hour = date.getUTCHours(date);
+            const minute = date.getUTCMinutes(date);
+
+            const time = convertTime(data[property][1], hour, minute);
 
             currentTime.innerHTML = time;
         } else if (property == "Temperature") {
@@ -54,10 +55,10 @@ function populateCurrentWeather(data) {
             // U+2109 for Fahrenheit
         } else if (property == "Condition") {
             currentConditionName.innerHTML = `${capitalizeFirstLetters(
-                data[property]
+                data[property][0]
             )}`;
             // Update the condition Icon according to name
-            currentConditionIcon.src = "assets/cloud.png";
+            currentConditionIcon.src = `https://openweathermap.org/img/wn/${data[property][1]}@2x.png`;
         } else {
             const weatherItem = document.createElement("div");
             const hr = document.createElement("hr");
@@ -157,18 +158,18 @@ function populateForecast(data) {
 
         for (const property in tileData) {
             if (property == "Date") {
-                let date = new Date(tileData[property] * 1000);
-                let hour = date.getHours(date);
+                let date = new Date(tileData[property][0] * 1000);
+                let hour = date.getUTCHours(date);
 
                 const time = document.createElement("div");
-                time.innerHTML = convertTime(hour);
+                time.innerHTML = convertTime(tileData[property][1], hour);
 
                 forecastTileMain.appendChild(time);
             } else if (property == "Condition") {
                 const icon = document.createElement("img");
                 icon.classList.add("forecastIcon");
 
-                icon.src = "assets/cloud.png";
+                icon.src = `https://openweathermap.org/img/wn/${tileData[property][1]}@2x.png`;
 
                 forecastTileDisplay.appendChild(icon);
             } else if (property == "Temperature") {
