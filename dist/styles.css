@@ -171,6 +171,22 @@ body {
     font-size: 1.6rem;
 }
 
+.airQualityBtn {
+    background-color: rgb(224, 105, 72);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    width: fit-content;
+    justify-self: end;
+    border: none;
+    border-radius: 5px;
+}
+
+.airQualityBtn:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+}
+
 .forecast {
     display: grid;
 }
