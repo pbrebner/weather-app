@@ -5,21 +5,28 @@ function convertTime(timezone, hour, minute) {
     let newTime = "";
 
     const timezoneShift = Math.floor(timezone / 3600);
+    let adjustedHour = hour + timezoneShift;
+
+    if (adjustedHour < 0) {
+        adjustedHour = adjustedHour + 24;
+    }
+
+    console.log(adjustedHour);
 
     if (!minute) {
-        if (hour < 12) {
-            newTime = `${(hour + timezoneShift) % 12 || 12}AM`;
+        if (adjustedHour < 12) {
+            newTime = `${adjustedHour % 12 || 12}AM`;
         } else {
-            newTime = `${(hour + timezoneShift) % 12 || 12}PM`;
+            newTime = `${adjustedHour % 12 || 12}PM`;
         }
     } else {
         if (minute.toString().length == 1) {
             minute = "0" + minute;
         }
-        if (hour < 12) {
-            newTime = `${(hour + timezoneShift) % 12 || 12}:${minute}AM`;
+        if (adjustedHour < 12) {
+            newTime = `${adjustedHour % 12 || 12}:${minute}AM`;
         } else {
-            newTime = `${(hour + timezoneShift) % 12 || 12}:${minute}PM`;
+            newTime = `${adjustedHour % 12 || 12}:${minute}PM`;
         }
     }
 
