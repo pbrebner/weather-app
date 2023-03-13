@@ -160,21 +160,48 @@ body {
 .airQualityMain {
     padding: 20px;
     display: grid;
-    grid-template-rows: 30px 1fr 30px;
+    grid-template-rows: 40px 1fr 30px;
 }
 
 .airQuality {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    align-items: center;
 }
 
 .airQualityDisplay {
-    font-size: 3rem;
+    height: 180px;
+    width: 180px;
+    font-size: 2rem;
     font-weight: bold;
 
+    position: relative;
+}
+
+.displayRing {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+        -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+
+    position: relative;
+
     display: grid;
-    justify-content: center;
-    align-items: center;
+    place-items: center;
+}
+
+.displayRing:before {
+    content: "";
+    position: absolute;
+    height: 84%;
+    width: 84%;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.aqiValue {
+    position: relative;
 }
 
 .airQualityDetails {
@@ -192,7 +219,7 @@ body {
 }
 
 .airQualityBtn {
-    background-color: rgb(224, 105, 72);
+    background-color: rgb(236, 110, 76);
     font-size: 1.2rem;
     font-weight: 600;
     padding: 5px 10px;
