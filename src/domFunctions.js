@@ -95,6 +95,8 @@ function populateCurrentWeather(data) {
 }
 
 function populateAirQuality(data) {
+    const airQualityContainer = document.querySelector(".airQualityContainer");
+
     const airQualityDisplay = document.querySelector(".airQualityDisplay");
     const airQualityHeader = document.querySelector(".airQualityHeader");
     const airQualityPara = document.querySelector(".airQualityPara");
@@ -102,6 +104,24 @@ function populateAirQuality(data) {
     airQualityDisplay.innerHTML = "";
     airQualityHeader.innerHTML = "";
     airQualityPara.innerHTML = "";
+
+    const ozoneValue = document.querySelector(".componentOzone .value");
+    const N2Value = document.querySelector(".componentNitrogenDioxide .value");
+    const finePMValue = document.querySelector(".componentFinePM .value");
+    const PMValue = document.querySelector(".componentPM .value");
+    const sulfurDioxideValue = document.querySelector(
+        ".componentSulfurDioxide .value"
+    );
+    const carbonMonoxideValue = document.querySelector(
+        ".componentCarbonMonoxide .value"
+    );
+
+    ozoneValue.innerHTML = "";
+    N2Value.innerHTML = "";
+    finePMValue.innerHTML = "";
+    PMValue.innerHTML = "";
+    sulfurDioxideValue.innerHTML = "";
+    carbonMonoxideValue.innerHTML = "";
 
     const airQualityDesciptions = {
         1: [
@@ -134,8 +154,20 @@ function populateAirQuality(data) {
                 airQualityDesciptions[`${data[property]}`][0];
             airQualityPara.innerHTML =
                 airQualityDesciptions[`${data[property]}`][1];
+        } else if (property == "components") {
+            ozoneValue.innerHTML = `${data[property].o3} &#181g/m<sup>3</sup>`;
+            N2Value.innerHTML = `${data[property].no2} &#181g/m<sup>3</sup>`;
+            finePMValue.innerHTML = `${data[property].pm2_5} &#181g/m<sup>3</sup>`;
+            PMValue.innerHTML = `${data[property].pm10} &#181g/m<sup>3</sup>`;
+            sulfurDioxideValue.innerHTML = `${data[property].so2} &#181g/m<sup>3</sup>`;
+            carbonMonoxideValue.innerHTML = `${data[property].co} &#181g/m<sup>3</sup>`;
         }
     }
+
+    const airQualityBtn = document.querySelector(".airQualityBtn");
+    airQualityBtn.addEventListener("click", () => {
+        airQualityContainer.classList.toggle("expandAirQuality");
+    });
 }
 
 function populateForecast(data) {
@@ -227,7 +259,7 @@ function populateForecast(data) {
         expandBtn.innerHTML = "&#8964";
 
         expandBtn.addEventListener("click", () => {
-            forecastTile.classList.toggle("expand");
+            forecastTile.classList.toggle("expandForecast");
         });
 
         forecastTileMain.appendChild(expandBtn);

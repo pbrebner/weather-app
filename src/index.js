@@ -57,6 +57,7 @@ async function processAirQuality(location) {
     let importantData = {};
 
     importantData.AQI = airQualityData.list[0].main.aqi;
+    importantData.components = airQualityData.list[0].components;
 
     return importantData;
 }
