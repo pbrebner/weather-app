@@ -6,11 +6,14 @@ import {
     populateCurrentWeather,
     populateAirQuality,
     populateForecast,
+    startLoadingAnimation,
+    endLoadingAnimation,
 } from "./domFunctions";
 
 async function processWeather(location) {
     // Gets data from get weather apiFunctions function and gathers relavent info for display
-    // Need to add try/catch to handle errors
+    // Need to add try/catch to handle error
+
     const weatherData = await getWeather(location);
 
     console.log(weatherData);
@@ -123,6 +126,7 @@ async function processMap() {
 async function loadPage(location) {
     // Add some visual indication that we're waiting for the data (promise.all) before it gets displayed (Map would likey take the longest to display)
     //Could add a class to change the display prior to promise.all showing that it's loading, and remove it to show data if successful or display a no results found page if error
+    startLoadingAnimation();
 
     // Use a promise.all to wait for all processing to complete before displaying data
 
@@ -130,13 +134,20 @@ async function loadPage(location) {
         processWeather(location),
         processAirQuality(location),
         processForecast(location),
-    ]).then((data) => {
-        //console.log(data);
-        populateLocation(data[0]);
-        populateCurrentWeather(data[0]);
-        populateAirQuality(data[1]);
-        populateForecast(data[2]);
-    });
+    ])
+        .then((data) => {
+            //console.log(data);
+            populateLocation(data[0]);
+            populateCurrentWeather(data[0]);
+            populateAirQuality(data[1]);
+            populateForecast(data[2]);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => {
+            endLoadingAnimation();
+        });
 }
 
 const submitBtn = document.querySelector(".submitBtn");
