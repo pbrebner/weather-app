@@ -37,122 +37,138 @@
             </div>
         </header>
         <main class="main">
-            <div class="currentWeatherContainer conditionContainer">
-                <h2>Current Weather</h2>
-
-                <div class="currentWeather">
-                    <div class="currentWeatherDisplay">
-                        <div class="currentCondition">
-                            <p class="currentTime"></p>
-                            <img
-                                src=""
-                                alt="Weather Icon"
-                                class="currentConditionIcon"
-                            />
-                            <div class="currentConditionName"></div>
+            <div class="outerWrapper">
+                <div
+                    class="currentWeatherContainer conditionContainer hideContainer"
+                >
+                    <h2>Current Weather</h2>
+                    <div class="currentWeather">
+                        <div class="currentWeatherDisplay">
+                            <div class="currentCondition">
+                                <p class="currentTime"></p>
+                                <img
+                                    src=""
+                                    alt="Weather Icon"
+                                    class="currentConditionIcon"
+                                />
+                                <div class="currentConditionName"></div>
+                            </div>
+                            <div class="currentTemp"></div>
                         </div>
-                        <div class="currentTemp"></div>
+                        <div class="currentWeatherDetails"></div>
                     </div>
-                    <div class="currentWeatherDetails"></div>
                 </div>
             </div>
-            <div class="airQualityContainer conditionContainer">
-                <div class="airQualityMain">
-                    <h2>Current Air Quality</h2>
-                    <div class="airQuality">
-                        <div class="airQualityDisplay">
-                            <div class="displayRing">
-                                <div class="aqiValue"></div>
+            <div class="outerWrapper">
+                <div class="airQualityContainer conditionContainer">
+                    <div class="airQualityMain">
+                        <h2>Current Air Quality</h2>
+                        <div class="airQuality">
+                            <div class="airQualityDisplay">
+                                <div class="displayRing">
+                                    <div class="aqiValue"></div>
+                                </div>
+                            </div>
+                            <div class="airQualityDetails">
+                                <div class="airQualityHeader"></div>
+                                <div class="airQualityPara"></div>
                             </div>
                         </div>
-                        <div class="airQualityDetails">
-                            <div class="airQualityHeader"></div>
-                            <div class="airQualityPara"></div>
+                        <button class="airQualityBtn">More Details</button>
+                    </div>
+                    <div class="airQualityComponents">
+                        <div class="airQualityComponent componentOzone">
+                            <div class="symbol">O<sub>3</sub></div>
+                            <p class="description">
+                                Ground-level Ozone can aggravate existing
+                                respiratory diseases and also lead to throat
+                                irritation, headaches, and chest pain.
+                            </p>
+                            <div class="value">50</div>
                         </div>
+                        <hr />
+                        <div
+                            class="airQualityComponent componentNitrogenDioxide"
+                        >
+                            <div class="symbol">NO<sub>2</sub></div>
+                            <p class="description">
+                                Breathing in high levels of Nitrogen Dioxide
+                                increases the risk of respiratory problems.
+                                Coughing and difficulty breathing are common and
+                                more serious health issues such as respiratory
+                                infections can occur with longer exposure.
+                            </p>
+                            <div class="value">50</div>
+                        </div>
+                        <hr />
+                        <div class="airQualityComponent componentFinePM">
+                            <div class="symbol">PM<sub>2.5</sub></div>
+                            <p class="description">
+                                Fine Particulate Matter are inhalable pollutant
+                                particles with a diameter less than 2.5
+                                micrometers that can enter the lungs and
+                                bloodstream, resulting in serious health issues.
+                                The most severe impacts are on the lungs and
+                                heart. Exposure can result in coughing or
+                                difficulty breathing, aggravated asthma, and the
+                                development of chronic respiratory disease.
+                            </p>
+                            <div class="value">50</div>
+                        </div>
+                        <hr />
+                        <div class="airQualityComponent componentPM">
+                            <div class="symbol">PM<sub>10</sub></div>
+                            <p class="description">
+                                Particulate Matter are inhalable pollutant
+                                particles with a diameter less than 10
+                                micrometers. Particles that are larger than 2.5
+                                micrometers can be deposited in airways,
+                                resulting in health issues. Exposure can result
+                                in eye and throat irritation, coughing or
+                                difficulty breathing, and aggravated asthma.
+                                More frequent and excessive exposure can result
+                                in more serious health effects.
+                            </p>
+                            <div class="value">50</div>
+                        </div>
+                        <hr />
+                        <div class="airQualityComponent componentSulfurDioxide">
+                            <div class="symbol">SO<sub>2</sub></div>
+                            <p class="description">
+                                Exposure to Sulfur Dioxide can lead to throat
+                                and eye irritation and aggravate asthma as well
+                                as chronic bronchitis.
+                            </p>
+                            <div class="value">50</div>
+                        </div>
+                        <hr />
+                        <div
+                            class="airQualityComponent componentCarbonMonoxide"
+                        >
+                            <div class="symbol">CO</div>
+                            <p class="description">
+                                Carbon Monoxide is a colorless and odorless gas
+                                and when inhaled at high levels can cause
+                                headache, nausea, dizziness, and vomiting.
+                                Repeated long-term exposure can lead to heart
+                                disease.
+                            </p>
+                            <div class="value">50</div>
+                        </div>
+                        <hr />
                     </div>
-                    <button class="airQualityBtn">More Details</button>
-                </div>
-                <div class="airQualityComponents">
-                    <div class="airQualityComponent componentOzone">
-                        <div class="symbol">O<sub>3</sub></div>
-                        <p class="description">
-                            Ground-level Ozone can aggravate existing
-                            respiratory diseases and also lead to throat
-                            irritation, headaches, and chest pain.
-                        </p>
-                        <div class="value">50</div>
-                    </div>
-                    <hr />
-                    <div class="airQualityComponent componentNitrogenDioxide">
-                        <div class="symbol">NO<sub>2</sub></div>
-                        <p class="description">
-                            Breathing in high levels of Nitrogen Dioxide
-                            increases the risk of respiratory problems. Coughing
-                            and difficulty breathing are common and more serious
-                            health issues such as respiratory infections can
-                            occur with longer exposure.
-                        </p>
-                        <div class="value">50</div>
-                    </div>
-                    <hr />
-                    <div class="airQualityComponent componentFinePM">
-                        <div class="symbol">PM<sub>2.5</sub></div>
-                        <p class="description">
-                            Fine Particulate Matter are inhalable pollutant
-                            particles with a diameter less than 2.5 micrometers
-                            that can enter the lungs and bloodstream, resulting
-                            in serious health issues. The most severe impacts
-                            are on the lungs and heart. Exposure can result in
-                            coughing or difficulty breathing, aggravated asthma,
-                            and the development of chronic respiratory disease.
-                        </p>
-                        <div class="value">50</div>
-                    </div>
-                    <hr />
-                    <div class="airQualityComponent componentPM">
-                        <div class="symbol">PM<sub>10</sub></div>
-                        <p class="description">
-                            Particulate Matter are inhalable pollutant particles
-                            with a diameter less than 10 micrometers. Particles
-                            that are larger than 2.5 micrometers can be
-                            deposited in airways, resulting in health issues.
-                            Exposure can result in eye and throat irritation,
-                            coughing or difficulty breathing, and aggravated
-                            asthma. More frequent and excessive exposure can
-                            result in more serious health effects.
-                        </p>
-                        <div class="value">50</div>
-                    </div>
-                    <hr />
-                    <div class="airQualityComponent componentSulfurDioxide">
-                        <div class="symbol">SO<sub>2</sub></div>
-                        <p class="description">
-                            Exposure to Sulfur Dioxide can lead to throat and
-                            eye irritation and aggravate asthma as well as
-                            chronic bronchitis.
-                        </p>
-                        <div class="value">50</div>
-                    </div>
-                    <hr />
-                    <div class="airQualityComponent componentCarbonMonoxide">
-                        <div class="symbol">CO</div>
-                        <p class="description">
-                            Carbon Monoxide is a colorless and odorless gas and
-                            when inhaled at high levels can cause headache,
-                            nausea, dizziness, and vomiting. Repeated long-term
-                            exposure can lead to heart disease.
-                        </p>
-                        <div class="value">50</div>
-                    </div>
-                    <hr />
                 </div>
             </div>
-            <div class="forecastContainer conditionContainer">
-                <h2>24Hr Forecast</h2>
-                <div class="forecast"></div>
+            <div class="outerWrapper">
+                <div class="forecastContainer conditionContainer">
+                    <h2>24Hr Forecast</h2>
+                    <div class="forecast"></div>
+                </div>
             </div>
-            <div class="weatherMapContainer conditionContainer">
-                <h2>Map</h2>
+            <div class="outerWrapper">
+                <div class="weatherMapContainer conditionContainer">
+                    <h2>Map</h2>
+                </div>
             </div>
         </main>
         <footer class="footer">

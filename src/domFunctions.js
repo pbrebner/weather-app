@@ -297,9 +297,42 @@ function populateForecast(data) {
     }
 }
 
+function startLoadingAnimation() {
+    const conditionContainers = document.querySelectorAll(
+        ".conditionContainer"
+    );
+    const outerWrappers = document.querySelectorAll(".outerWrapper");
+
+    conditionContainers.forEach((container) => {
+        container.classList.add("hideContainer");
+    });
+
+    outerWrappers.forEach((wrapper) => {
+        wrapper.classList.add("skeleton");
+    });
+}
+
+function endLoadingAnimation() {
+    const conditionContainers = document.querySelectorAll(
+        ".conditionContainer"
+    );
+
+    const outerWrappers = document.querySelectorAll(".outerWrapper");
+
+    conditionContainers.forEach((container) => {
+        container.classList.remove("hideContainer");
+    });
+
+    outerWrappers.forEach((wrapper) => {
+        wrapper.classList.remove("skeleton");
+    });
+}
+
 export {
     populateLocation,
     populateCurrentWeather,
     populateAirQuality,
     populateForecast,
+    startLoadingAnimation,
+    endLoadingAnimation,
 };
