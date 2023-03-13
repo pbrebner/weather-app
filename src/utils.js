@@ -11,8 +11,6 @@ function convertTime(timezone, hour, minute) {
         adjustedHour = adjustedHour + 24;
     }
 
-    console.log(adjustedHour);
-
     if (!minute) {
         if (adjustedHour < 12) {
             newTime = `${adjustedHour % 12 || 12}AM`;
