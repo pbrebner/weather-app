@@ -98,10 +98,15 @@ function populateAirQuality(data) {
     const airQualityContainer = document.querySelector(".airQualityContainer");
 
     const airQualityDisplay = document.querySelector(".airQualityDisplay");
+    //const innerRing = document.querySelector(".innerRing");
+    const displayRing = document.querySelector(".displayRing");
+    const aqiValue = document.querySelector(".aqiValue");
     const airQualityHeader = document.querySelector(".airQualityHeader");
     const airQualityPara = document.querySelector(".airQualityPara");
 
-    airQualityDisplay.innerHTML = "";
+    //airQualityDisplay.innerHTML = "";
+    //innerRing.innerHTML = "";
+    aqiValue.innerHTML = "";
     airQualityHeader.innerHTML = "";
     airQualityPara.innerHTML = "";
 
@@ -148,7 +153,23 @@ function populateAirQuality(data) {
 
     for (const property in data) {
         if (property == "AQI") {
-            airQualityDisplay.innerHTML = `${data[property]} AQI`;
+            let speed = 30;
+            let progressValue = 0;
+            let progressEndValue = data[property] * 20;
+
+            let progress = setInterval(() => {
+                progressValue += 1;
+                //aqiValue.innerHTML = `${progressValue}%`
+                displayRing.style.background = `conic-gradient(
+                    #4d5bf9 ${progressValue * 3.6}deg,
+                    #cadcff ${progressValue * 3.6}deg
+                )`;
+                if (progressValue == progressEndValue) {
+                    clearInterval(progress);
+                }
+            }, speed);
+
+            aqiValue.innerHTML = `${data[property]} AQI`;
 
             airQualityHeader.innerHTML =
                 airQualityDesciptions[`${data[property]}`][0];
@@ -167,6 +188,11 @@ function populateAirQuality(data) {
     const airQualityBtn = document.querySelector(".airQualityBtn");
     airQualityBtn.addEventListener("click", () => {
         airQualityContainer.classList.toggle("expandAirQuality");
+        if (airQualityBtn.textContent == "More Details") {
+            airQualityBtn.textContent = "Less Details";
+        } else {
+            airQualityBtn.textContent = "More Details";
+        }
     });
 }
 

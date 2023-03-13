@@ -83,7 +83,9 @@ async function processForecast(location) {
         importantData[
             index
         ].Temperature = `${forecastData.list[index].main.temp} &#8451`;
-        importantData[index].Pop = `${forecastData.list[index].pop * 100} %`;
+        importantData[index].Pop = `${Math.round(
+            forecastData.list[index].pop * 100
+        )} %`;
 
         importantData[index][
             "Feels Like"
