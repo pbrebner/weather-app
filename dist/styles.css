@@ -80,10 +80,31 @@ body {
     align-items: center;
 }
 
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 95%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 80%);
+    }
+}
+
+.outerWrapper {
+    width: 800px;
+    min-height: 300px;
+
+    border-radius: 10px;
+}
+
 .conditionContainer {
     background-color: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
 
     /*Should add some flexibilty to these */
     width: 800px;
@@ -91,6 +112,10 @@ body {
 
     display: grid;
     grid-template-rows: 30px 1fr;
+}
+
+.conditionContainer.hideContainer {
+    display: none;
 }
 
 .currentWeather {
