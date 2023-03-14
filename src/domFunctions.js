@@ -103,12 +103,14 @@ function populateAirQuality(data) {
     const aqiValue = document.querySelector(".aqiValue");
     const airQualityHeader = document.querySelector(".airQualityHeader");
     const airQualityPara = document.querySelector(".airQualityPara");
+    const detailsBtnDiv = document.querySelector(".detailsBtnDiv");
 
     //airQualityDisplay.innerHTML = "";
     //innerRing.innerHTML = "";
     aqiValue.innerHTML = "";
     airQualityHeader.innerHTML = "";
     airQualityPara.innerHTML = "";
+    detailsBtnDiv.innerHTML = "";
 
     const ozoneValue = document.querySelector(".componentOzone .value");
     const N2Value = document.querySelector(".componentNitrogenDioxide .value");
@@ -185,7 +187,10 @@ function populateAirQuality(data) {
         }
     }
 
-    const airQualityBtn = document.querySelector(".airQualityBtn");
+    const airQualityBtn = document.createElement("button");
+    airQualityBtn.classList.add("airQualityBtn");
+    airQualityBtn.textContent = "More Details";
+
     airQualityBtn.addEventListener("click", () => {
         airQualityContainer.classList.toggle("expandAirQuality");
 
@@ -195,6 +200,8 @@ function populateAirQuality(data) {
             airQualityBtn.textContent = "More Details";
         }
     });
+
+    detailsBtnDiv.appendChild(airQualityBtn);
 }
 
 function populateForecast(data) {
