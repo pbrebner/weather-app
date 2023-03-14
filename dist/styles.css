@@ -94,11 +94,27 @@ body {
     }
 }
 
-.outerWrapper {
+.outerWrapper,
+.errorWrapper {
     width: 800px;
     min-height: 300px;
 
     border-radius: 10px;
+}
+
+.errorContainer {
+    background-color: white;
+    padding: 20px 80px;
+    border-radius: 10px;
+
+    /*Should add some flexibilty to these */
+    width: 800px;
+    min-height: 300px;
+
+    display: grid;
+    grid-template-rows: 30px 1fr 50px;
+    justify-items: center;
+    text-align: center;
 }
 
 .conditionContainer {
@@ -114,7 +130,9 @@ body {
     grid-template-rows: 30px 1fr;
 }
 
-.conditionContainer.hideContainer {
+.conditionContainer.hideContainer,
+.outerWrapper.hideContainer,
+.errorWrapper.hideContainer {
     display: none;
 }
 
