@@ -188,6 +188,7 @@ function populateAirQuality(data) {
     const airQualityBtn = document.querySelector(".airQualityBtn");
     airQualityBtn.addEventListener("click", () => {
         airQualityContainer.classList.toggle("expandAirQuality");
+
         if (airQualityBtn.textContent == "More Details") {
             airQualityBtn.textContent = "Less Details";
         } else {
@@ -297,7 +298,36 @@ function populateForecast(data) {
     }
 }
 
+function addError() {
+    const location = document.querySelector(".location");
+    location.innerHTML = "";
+
+    const outerWrappers = document.querySelectorAll(".outerWrapper");
+
+    const errorContainer = document.querySelector(".errorContainer");
+    const errorWrapper = document.querySelector(".errorWrapper");
+
+    outerWrappers.forEach((wrapper) => {
+        wrapper.classList.add("hideContainer");
+    });
+
+    errorWrapper.classList.remove("hideContainer");
+}
+
+function removeError() {
+    const outerWrappers = document.querySelectorAll(".outerWrapper");
+    const errorWrapper = document.querySelector(".errorWrapper");
+
+    outerWrappers.forEach((wrapper) => {
+        wrapper.classList.remove("hideContainer");
+    });
+
+    errorWrapper.classList.add("hideContainer");
+}
+
 function startLoadingAnimation() {
+    removeError();
+
     const conditionContainers = document.querySelectorAll(
         ".conditionContainer"
     );
@@ -333,6 +363,7 @@ export {
     populateCurrentWeather,
     populateAirQuality,
     populateForecast,
+    addError,
     startLoadingAnimation,
     endLoadingAnimation,
 };

@@ -6,6 +6,7 @@ import {
     populateCurrentWeather,
     populateAirQuality,
     populateForecast,
+    addError,
     startLoadingAnimation,
     endLoadingAnimation,
 } from "./domFunctions";
@@ -136,7 +137,6 @@ async function loadPage(location) {
         processForecast(location),
     ])
         .then((data) => {
-            //console.log(data);
             populateLocation(data[0]);
             populateCurrentWeather(data[0]);
             populateAirQuality(data[1]);
@@ -144,6 +144,7 @@ async function loadPage(location) {
         })
         .catch((error) => {
             console.log(error);
+            addError();
         })
         .finally(() => {
             endLoadingAnimation();
