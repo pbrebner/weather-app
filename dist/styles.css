@@ -22,6 +22,15 @@ body {
     padding: 0 50px;
 
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerContent {
+    max-width: 1200px;
+
+    flex: 1;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -30,6 +39,12 @@ body {
     display: flex;
     align-items: center;
     gap: 40px;
+}
+
+@media (max-width: 850px) {
+    h1 {
+        display: none;
+    }
 }
 
 .logo {
@@ -60,6 +75,12 @@ body {
     background-color: white;
 }
 
+@media (max-width: 900px) {
+    .search {
+        width: 150px;
+    }
+}
+
 .search:focus {
     outline: none;
 }
@@ -75,9 +96,13 @@ body {
     padding: 20px;
 
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: minmax(700px, 800px);
     gap: 20px;
-    align-items: center;
 }
 
 .skeleton {
@@ -96,7 +121,7 @@ body {
 
 .outerWrapper,
 .errorWrapper {
-    width: 800px;
+    width: 100%;
     min-height: 300px;
 
     border-radius: 10px;
@@ -107,8 +132,7 @@ body {
     padding: 20px 80px;
     border-radius: 10px;
 
-    /*Should add some flexibilty to these */
-    width: 800px;
+    width: 100%;
     min-height: 300px;
 
     display: grid;
@@ -122,8 +146,7 @@ body {
     padding: 20px;
     border-radius: 10px;
 
-    /*Should add some flexibilty to these */
-    width: 800px;
+    width: 100%;
     min-height: 300px;
 
     display: grid;
@@ -163,7 +186,7 @@ body {
 }
 
 .currentConditionIcon {
-    height: 100px;
+    height: 130px;
 }
 
 .currentTemp {
@@ -342,6 +365,10 @@ body {
     font-size: 2rem;
     background: none;
     border: none;
+}
+
+.expandBtn:hover {
+    cursor: pointer;
 }
 
 .forecastTileSupp {
