@@ -9,6 +9,7 @@
 }
 
 body {
+    font-family: "Roboto", sans-serif;
     min-height: 100vh;
     display: grid;
     grid-template-rows: 80px 1fr 40px;
@@ -101,7 +102,7 @@ body {
 
 .mainContent {
     display: grid;
-    grid-template-columns: minmax(700px, 800px);
+    grid-template-columns: minmax(620px, 800px);
     gap: 20px;
 }
 
@@ -205,6 +206,7 @@ body {
 
 .currentWeatherItem {
     display: flex;
+    gap: 20px;
     justify-content: space-between;
     padding: 0 10px;
 }
@@ -212,7 +214,7 @@ body {
 .airQualityContainer {
     padding: 0;
     display: grid;
-    grid-template-rows: 300px 600px;
+    grid-template-rows: 300px minmax(600px, 700px);
     overflow: hidden;
 
     height: 300px;
@@ -220,7 +222,7 @@ body {
 }
 
 .airQualityContainer.expandAirQuality {
-    height: 900px;
+    height: fit-content;
 }
 
 .airQualityMain {
