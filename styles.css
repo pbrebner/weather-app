@@ -20,7 +20,7 @@ body {
 .header {
     background-color: rgb(31, 31, 31);
     color: white;
-    padding: 0 50px;
+    padding: 5px 30px;
 
     display: flex;
     justify-content: center;
@@ -34,22 +34,25 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .heading {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
 }
 
-@media (max-width: 850px) {
-    h1 {
-        display: none;
-    }
+h1 {
+    display: none;
 }
 
 .logo {
-    height: 60px;
+    height: 40px;
+}
+
+.location {
+    font-size: 0.8rem;
 }
 
 .searchContainer {
@@ -64,22 +67,20 @@ body {
 }
 
 .searchIcon {
-    height: 20px;
+    height: 15px;
+}
+
+.search {
+    max-width: 80px;
 }
 
 .search,
 .submitBtn {
-    font-size: 1rem;
+    font-size: 0.8rem;
     padding: 3px;
 
     border: none;
     background-color: white;
-}
-
-@media (max-width: 900px) {
-    .search {
-        width: 150px;
-    }
 }
 
 .search:focus {
@@ -88,6 +89,39 @@ body {
 
 .submitBtn:hover {
     cursor: pointer;
+}
+
+@media (min-width: 600px) {
+    .logo {
+        height: 60px;
+    }
+
+    .location {
+        font-size: 1.2rem;
+    }
+
+    .heading {
+        gap: 40px;
+    }
+
+    .search {
+        max-width: 150px;
+    }
+
+    .searchIcon {
+        height: 20px;
+    }
+
+    .search,
+    .submitBtn {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 900px) {
+    h1 {
+        display: block;
+    }
 }
 
 /* Main Section */
@@ -102,7 +136,7 @@ body {
 
 .mainContent {
     display: grid;
-    grid-template-columns: minmax(620px, 800px);
+    grid-template-columns: minmax(250px, 800px);
     gap: 20px;
 }
 
@@ -162,7 +196,9 @@ body {
 
 .currentWeather {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "display"
+        "details";
 }
 
 .currentWeatherDisplay {
@@ -172,6 +208,8 @@ body {
     grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-items: center;
+
+    grid-area: display;
 }
 
 .currentCondition {
@@ -198,6 +236,8 @@ body {
     font-size: 1.2rem;
     display: grid;
     gap: 3px;
+
+    grid-area: details;
 }
 
 .currentWeatherDetails hr {
@@ -211,13 +251,17 @@ body {
     padding: 0 10px;
 }
 
+.weatherItemData {
+    text-align: end;
+}
+
 .airQualityContainer {
     padding: 0;
     display: grid;
-    grid-template-rows: 300px minmax(600px, 700px);
+    grid-template-rows: 500px 1fr;
     overflow: hidden;
 
-    height: 300px;
+    height: 500px;
     transition: height 0.4s ease-in-out;
 }
 
@@ -233,8 +277,9 @@ body {
 
 .airQuality {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: center;
+    grid-template-areas:
+        "display"
+        "details";
 }
 
 .airQualityDisplay {
@@ -244,6 +289,9 @@ body {
     font-weight: bold;
 
     position: relative;
+    grid-area: display;
+    align-self: center;
+    justify-self: center;
 }
 
 .displayRing {
@@ -280,6 +328,7 @@ body {
     gap: 10px;
 
     width: 95%;
+    grid-area: details;
 }
 
 .airQualityHeader {
@@ -340,11 +389,11 @@ body {
 }
 
 .forecastTile.expandForecast {
-    height: 220px;
+    height: fit-content;
 }
 
 .forecastTileMain {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     padding: 10px;
 
     display: flex;
@@ -353,18 +402,18 @@ body {
 }
 
 .forecastTileDisplay {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .forecastIcon {
-    height: 60px;
+    height: 40px;
 }
 
 .expandBtn {
-    font-size: 2rem;
+    font-size: 1.6rem;
     background: none;
     border: none;
 }
@@ -374,15 +423,17 @@ body {
 }
 
 .forecastTileSupp {
-    padding: 10px;
+    padding: 5px;
+    font-size: 0.7rem;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 5px;
 }
 
 .forecastItem {
-    padding: 0 20px;
+    padding: 0 5px;
+    min-height: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -393,12 +444,52 @@ body {
 
 .forecastItemData {
     padding-right: 5px;
-    justify-self: end;
+    text-align: end;
 }
 
 .forecastHr {
     height: 1px;
     grid-column: 1 / -1;
+}
+
+@media (min-width: 600px) {
+    .currentWeather {
+        grid-template-areas: "display details";
+    }
+
+    .airQuality {
+        grid-template-areas: "display details";
+        gap: 40px;
+    }
+
+    .airQualityContainer {
+        grid-template-rows: 340px 1fr;
+
+        height: 340px;
+    }
+
+    .forecastTileMain {
+        font-size: 1.2rem;
+    }
+
+    .forecastTileDisplay {
+        font-size: 1.8rem;
+        gap: 20px;
+    }
+
+    .forecastIcon {
+        height: 60px;
+    }
+
+    .expandBtn {
+        font-size: 2rem;
+    }
+
+    .forecastTileSupp {
+        padding: 10px;
+        gap: 10px;
+        font-size: 1.2rem;
+    }
 }
 
 /* Footer Section */
