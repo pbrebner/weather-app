@@ -33,7 +33,7 @@ function convertTime(timezone, hour, minute) {
 
 function convertWindDirection(deg) {
     // Change in direction every 22.5 degrees
-    const val = Math.floor(deg / 22.5 + 0.5);
+    const val = Math.round(deg / 22.5);
     const compassDirections = [
         "N",
         "NNE",
