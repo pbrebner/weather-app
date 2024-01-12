@@ -66,6 +66,7 @@ function populateCurrentWeather(data) {
 
             const weatherItemProperty = document.createElement("div");
             const weatherItemData = document.createElement("div");
+            weatherItemData.classList.add("weatherItemData");
 
             if (property == "Location") {
                 weatherItemProperty.innerHTML = `${property}`;
