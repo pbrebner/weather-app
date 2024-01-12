@@ -23,8 +23,10 @@ async function processWeather(location) {
 
     importantData.Location = [weatherData.name, weatherData.sys.country];
     importantData.Date = [weatherData.dt, weatherData.timezone];
-    importantData.Temperature = `${weatherData.main.temp} &#8451`;
-    importantData["Feels Like"] = `${weatherData.main.feels_like} &#8451`;
+    importantData.Temperature = `${Math.round(weatherData.main.temp)} &#8451`;
+    importantData["Feels Like"] = `${Math.round(
+        weatherData.main.feels_like
+    )} &#8451`;
     importantData.Humidity = `${weatherData.main.humidity} %`;
     importantData.Wind = [
         `${Math.round(weatherData.wind.speed * 3.6 * 100) / 100} km/hr`,
@@ -84,16 +86,16 @@ async function processForecast(location) {
             forecastData.list[index].weather[0].description,
             forecastData.list[index].weather[0].icon,
         ];
-        importantData[
-            index
-        ].Temperature = `${forecastData.list[index].main.temp} &#8451`;
+        importantData[index].Temperature = `${Math.round(
+            forecastData.list[index].main.temp
+        )} &#8451`;
         importantData[index].Pop = `${Math.round(
             forecastData.list[index].pop * 100
         )} %`;
 
-        importantData[index][
-            "Feels Like"
-        ] = `${forecastData.list[index].main.feels_like} &#8451`;
+        importantData[index]["Feels Like"] = `${Math.round(
+            forecastData.list[index].main.feels_like
+        )} &#8451`;
         importantData[
             index
         ].Humidity = `${forecastData.list[index].main.humidity}%`;
