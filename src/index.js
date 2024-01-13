@@ -1,6 +1,12 @@
 // Source index script for Weather App
 
-import { getWeather, getAirQuality, getForecast } from "./apiFunctions";
+import {
+    getWeather,
+    getAirQuality,
+    getForecast,
+    getWeatherMap,
+    updateWeatherMap,
+} from "./apiFunctions";
 import {
     populateLocation,
     populateCurrentWeather,
@@ -122,11 +128,12 @@ async function processForecast(location) {
     return importantData;
 }
 
-async function processMap() {
+async function processMap(location) {
     // Gets data from map apiFunctions function and gathers relavent info for display
+    updateWeatherMap(location);
 }
 
-async function loadPage(location) {
+async function loadPage(location, map) {
     // Add some visual indication that we're waiting for the data (promise.all) before it gets displayed (Map would likey take the longest to display)
     //Could add a class to change the display prior to promise.all showing that it's loading, and remove it to show data if successful or display a no results found page if error
     startLoadingAnimation();
@@ -137,6 +144,7 @@ async function loadPage(location) {
         processWeather(location),
         processAirQuality(location),
         processForecast(location),
+        processMap(location),
     ])
         .then((data) => {
             populateLocation(data[0]);
@@ -164,4 +172,5 @@ submitBtn.addEventListener("click", (event) => {
     search.value = "";
 });
 
+let map = getWeatherMap("London");
 loadPage("London");
