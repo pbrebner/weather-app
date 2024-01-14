@@ -53,6 +53,7 @@ h1 {
 
 .location {
     font-size: 0.8rem;
+    display: none;
 }
 
 .searchContainer {
@@ -90,6 +91,12 @@ h1 {
 
 .submitBtn:hover {
     cursor: pointer;
+}
+
+@media (min-width: 340px) {
+    .location {
+        display: block;
+    }
 }
 
 @media (min-width: 600px) {
@@ -277,7 +284,6 @@ h1 {
     overflow: hidden;
 
     height: 500px;
-    transition: height 0.4s ease-in-out;
 }
 
 .airQualityContainer.expandAirQuality {
@@ -356,8 +362,8 @@ h1 {
 
 .airQualityBtn {
     background-color: rgb(236, 110, 76);
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
     padding: 5px 10px;
     width: fit-content;
 
@@ -392,7 +398,7 @@ h1 {
 }
 
 .forecastTile {
-    height: 80px;
+    max-height: 80px;
     overflow: hidden;
     border-bottom: 1px solid grey;
 
@@ -400,11 +406,12 @@ h1 {
     grid-template-rows: 80px 1fr;
     gap: 5px;
 
-    transition: height 0.4s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
 }
 
 .forecastTile.expandForecast {
-    height: fit-content;
+    max-height: 300px;
+    height: auto;
 }
 
 .forecastTileMain {
@@ -481,6 +488,11 @@ h1 {
         grid-template-rows: 340px 1fr;
 
         height: 340px;
+    }
+
+    .airQualityBtn {
+        font-size: 1.2rem;
+        font-weight: 600;
     }
 
     .forecastTileMain {
