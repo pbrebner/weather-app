@@ -155,13 +155,33 @@ async function loadPage(location) {
 
 const submitBtn = document.querySelector(".submitBtn");
 
-submitBtn.addEventListener("click", (event) => {
-    event.preventDefault();
+submitBtn.addEventListener("click", () => {
     const search = document.querySelector(".search");
 
-    loadPage(search.value);
+    if (search.value != "") {
+        loadPage(search.value);
+    }
 
     search.value = "";
 });
+
+window.addEventListener("load", initialize);
+
+function initialize() {
+    const form = document.querySelector(".searchForm");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+    });
+
+    const search = document.querySelector(".search");
+    const autocomplete = new google.maps.places.Autocomplete(search);
+
+    autocomplete.addListener("place_changed", function () {
+        const place = autocomplete.getPlace();
+
+        loadPage(place.name);
+        search.value = "";
+    });
+}
 
 loadPage("London");
