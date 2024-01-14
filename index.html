@@ -11,13 +11,20 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto"
         />
+
         <script src="main.js" defer></script>
+        <script
+            type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP0ToyRTN9uxiv-HmvhjYBgZPLz3jFqUI&libraries=places"
+        ></script>
     </head>
     <body>
         <header class="header">
             <div class="headerContent">
                 <div class="heading">
-                    <img src="assets/logo.png" alt="Icon" class="logo" />
+                    <a href=""
+                        ><img src="assets/logo.png" alt="Icon" class="logo"
+                    /></a>
                     <h1>The Weather App</h1>
                     <h3 class="location"></h3>
                 </div>
@@ -28,7 +35,7 @@
                         alt="Search"
                         class="searchIcon"
                     />
-                    <form action="post" id="searchForm">
+                    <form id="searchForm" class="searchForm">
                         <div>
                             <label for="search"></label>
                             <input
@@ -36,18 +43,11 @@
                                 id="search"
                                 class="search"
                                 placeholder="City"
-                                required
                             />
                         </div>
                     </form>
                     <div>
-                        <button
-                            type="submit"
-                            form="searchForm"
-                            class="submitBtn"
-                        >
-                            Search
-                        </button>
+                        <button class="submitBtn">Search</button>
                     </div>
                 </div>
             </div>

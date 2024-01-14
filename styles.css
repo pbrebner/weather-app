@@ -72,6 +72,7 @@ h1 {
 
 .search {
     max-width: 80px;
+    width: 100%;
 }
 
 .search,
@@ -105,7 +106,7 @@ h1 {
     }
 
     .search {
-        max-width: 150px;
+        max-width: 200px;
     }
 
     .searchIcon {
