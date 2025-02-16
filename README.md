@@ -1,6 +1,6 @@
 # Weather App
 
-![My Image](dist/assets/UI.png)
+![My Image](src/assets/UI.png)
 
 Check it out <a href="https://pbrebner.github.io/weather-app/">Live</a>
 
