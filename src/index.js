@@ -11,6 +11,8 @@ import {
     endLoadingAnimation,
 } from "./domFunctions";
 
+import "./styles.css";
+
 async function processWeather(location) {
     // Gets data from get weather apiFunctions function and gathers relavent info for display
     // Need to add try/catch to handle error
@@ -165,6 +167,7 @@ submitBtn.addEventListener("click", () => {
     search.value = "";
 });
 
+/*
 window.addEventListener("load", initialize);
 
 function initialize() {
@@ -183,5 +186,6 @@ function initialize() {
         search.value = "";
     });
 }
+*/
 
 loadPage("London");
