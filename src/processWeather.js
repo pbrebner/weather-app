@@ -1,12 +1,13 @@
 import { getWeather, getAirQuality, getForecast } from "./apiFunctions";
 
 async function processWeather(location, units) {
-    // Gets data from get weather apiFunctions function and gathers relavent info for display
-    // Need to add try/catch to handle error
+    // Gets data from getWeather apiFunctions function and formats data for display
 
     const weatherData = await getWeather(location, units);
 
+    // Factory function to create current weather object
     function createWeather(weatherData) {
+        // Weather data object to return
         let data = {};
 
         data.location = [weatherData.name, weatherData.sys.country];
@@ -85,6 +86,7 @@ async function processForecast(location, units) {
 
     const forecastData = await getForecast(location, units);
 
+    // Factory function to create forecast object
     function createForecast(forecastData, city) {
         let date = [forecastData.dt, city.timezone];
         let condition = [
@@ -155,6 +157,7 @@ async function processForecast(location, units) {
         }
     }
 
+    // Create list of forecast objects and return list
     let importantData = [];
 
     for (const index in forecastData.list) {

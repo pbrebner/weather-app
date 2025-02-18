@@ -18,8 +18,9 @@ import {
 } from "./domFunctions";
 
 async function loadPage(location, units = "metric", loading = true) {
-    // Add some visual indication that we're waiting for the data (promise.all) before it gets displayed (Map would likey take the longest to display)
-    //Could add a class to change the display prior to promise.all showing that it's loading, and remove it to show data if successful or display a no results found page if error
+    // Loads the page with the specified location and units
+
+    // Start loading animation
     if (loading) {
         startLoadingAnimation();
     }
@@ -44,27 +45,6 @@ async function loadPage(location, units = "metric", loading = true) {
             endLoadingAnimation();
         });
 }
-
-/*
-window.addEventListener("load", initialize);
-
-function initialize() {
-    const form = document.querySelector(".searchForm");
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-    });
-
-    const search = document.querySelector(".search");
-    const autocomplete = new google.maps.places.Autocomplete(search);
-
-    autocomplete.addListener("place_changed", function () {
-        const place = autocomplete.getPlace();
-
-        loadPage(place.name);
-        search.value = "";
-    });
-}
-*/
 
 loadPage("London", "metric");
 search();
