@@ -277,6 +277,26 @@ h1 {
     text-align: end;
 }
 
+.unitsBtnDiv {
+    justify-self: end;
+}
+
+.unitsBtn {
+    background-color: rgb(236, 110, 76);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    width: 140px;
+
+    border: none;
+    border-radius: 5px;
+}
+
+.unitsBtn:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+}
+
 .airQualityContainer {
     padding: 0;
     display: grid;
@@ -365,7 +385,7 @@ h1 {
     font-size: 1rem;
     font-weight: 500;
     padding: 5px 10px;
-    width: fit-content;
+    width: 140px;
 
     border: none;
     border-radius: 5px;

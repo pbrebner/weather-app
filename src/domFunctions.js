@@ -1,5 +1,5 @@
 // Functions to create and display DOM elements
-
+import { loadPage } from "./index";
 import {
     convertTime,
     convertWindDirection,
@@ -7,22 +7,22 @@ import {
 } from "./utils";
 
 function populateLocation(data) {
+    // Populates location in nav bar
     const location = document.querySelector(".location");
     location.innerHTML = "";
 
-    for (const property in data) {
-        if (property == "Location") {
-            let regionNames = new Intl.DisplayNames(["en"], {
-                type: "region",
-            });
-            let country = regionNames.of(`${data[property][1]}`);
+    let regionNames = new Intl.DisplayNames(["en"], {
+        type: "region",
+    });
 
-            location.innerHTML = `${data[property][0]}, ${country}`;
-        }
-    }
+    let country = regionNames.of(`${data.location[1]}`);
+    location.innerHTML = `${data.location[0]}, ${country}`;
 }
 
 function populateCurrentWeather(data) {
+    // Populates current weather dom elements
+
+    // Create main current weather elements
     const currentTime = document.querySelector(".currentTime");
 
     const currentWeatherDetails = document.querySelector(
@@ -40,8 +40,9 @@ function populateCurrentWeather(data) {
     currentWeatherDetails.innerHTML = "";
     currentTemp.innerHTML = "";
 
+    // Iterate through data object and assign values to dom elements
     for (const property in data) {
-        if (property == "Date") {
+        if (property == "date") {
             const date = new Date(data[property][0] * 1000);
 
             const hour = date.getUTCHours(date);
@@ -50,16 +51,16 @@ function populateCurrentWeather(data) {
             const time = convertTime(data[property][1], hour, minute);
 
             currentTime.innerHTML = time;
-        } else if (property == "Temperature") {
+        } else if (property == "temperature") {
             currentTemp.innerHTML = `${data[property]}`;
-            // U+2109 for Fahrenheit
-        } else if (property == "Condition") {
+        } else if (property == "condition") {
             currentConditionName.innerHTML = `${capitalizeFirstLetters(
                 data[property][0]
             )}`;
             // Update the condition Icon according to name
             currentConditionIcon.src = `https://openweathermap.org/img/wn/${data[property][1]}@2x.png`;
         } else {
+            // For all non-main current weather elements
             const weatherItem = document.createElement("div");
             const hr = document.createElement("hr");
             weatherItem.classList.add("currentWeatherItem");
@@ -68,7 +69,7 @@ function populateCurrentWeather(data) {
             const weatherItemData = document.createElement("div");
             weatherItemData.classList.add("weatherItemData");
 
-            if (property == "Location") {
+            if (property == "location") {
                 weatherItemProperty.innerHTML = `${property}`;
 
                 let regionNames = new Intl.DisplayNames(["en"], {
@@ -77,7 +78,7 @@ function populateCurrentWeather(data) {
                 let country = regionNames.of(`${data[property][1]}`);
 
                 weatherItemData.innerHTML = `${data[property][0]}, ${country}`;
-            } else if (property == "Wind") {
+            } else if (property == "wind") {
                 weatherItemProperty.innerHTML = `${property}`;
                 weatherItemData.innerHTML = `${
                     data[property][0]
@@ -96,18 +97,18 @@ function populateCurrentWeather(data) {
 }
 
 function populateAirQuality(data) {
+    // Populates current air quality dom elements
+
+    // Select all necessary HTML elements
     const airQualityContainer = document.querySelector(".airQualityContainer");
 
     const airQualityDisplay = document.querySelector(".airQualityDisplay");
-    //const innerRing = document.querySelector(".innerRing");
     const displayRing = document.querySelector(".displayRing");
     const aqiValue = document.querySelector(".aqiValue");
     const airQualityHeader = document.querySelector(".airQualityHeader");
     const airQualityPara = document.querySelector(".airQualityPara");
     const detailsBtnDiv = document.querySelector(".detailsBtnDiv");
 
-    //airQualityDisplay.innerHTML = "";
-    //innerRing.innerHTML = "";
     aqiValue.innerHTML = "";
     airQualityHeader.innerHTML = "";
     airQualityPara.innerHTML = "";
@@ -156,13 +157,14 @@ function populateAirQuality(data) {
 
     for (const property in data) {
         if (property == "AQI") {
+            // Create an interval to fill in AQI ring gradually on load
+            // AQI values is between 1 and 5
             let speed = 30;
             let progressValue = 0;
             let progressEndValue = data[property] * 20;
 
             let progress = setInterval(() => {
                 progressValue += 1;
-                //aqiValue.innerHTML = `${progressValue}%`
                 displayRing.style.background = `conic-gradient(
                     #4d5bf9 ${progressValue * 3.6}deg,
                     #cadcff ${progressValue * 3.6}deg
@@ -172,6 +174,7 @@ function populateAirQuality(data) {
                 }
             }, speed);
 
+            // Fills in other AQI values
             aqiValue.innerHTML = `${data[property]} AQI`;
 
             airQualityHeader.innerHTML =
@@ -179,6 +182,7 @@ function populateAirQuality(data) {
             airQualityPara.innerHTML =
                 airQualityDesciptions[`${data[property]}`][1];
         } else if (property == "components") {
+            // Fills in components values
             ozoneValue.innerHTML = `${data[property].o3} &#181g/m<sup>3</sup>`;
             N2Value.innerHTML = `${data[property].no2} &#181g/m<sup>3</sup>`;
             finePMValue.innerHTML = `${data[property].pm2_5} &#181g/m<sup>3</sup>`;
@@ -188,6 +192,7 @@ function populateAirQuality(data) {
         }
     }
 
+    // Creates a btn to display air quality details
     const airQualityBtn = document.createElement("button");
     airQualityBtn.classList.add("airQualityBtn");
     airQualityBtn.textContent = "More Details";
@@ -206,9 +211,11 @@ function populateAirQuality(data) {
 }
 
 function populateForecast(data) {
+    // Populates forecast weather dom elements
     const forecast = document.querySelector(".forecast");
     forecast.innerHTML = "";
 
+    // Iterate through the 8 forecast data values
     for (let i = 0; i < 8; i++) {
         const forecastTile = document.createElement("div");
         forecastTile.classList.add("forecastTile");
@@ -223,8 +230,9 @@ function populateForecast(data) {
 
         let tileData = data[i];
 
+        // Populate html elements with data based on object key
         for (const property in tileData) {
-            if (property == "Date") {
+            if (property == "date") {
                 let date = new Date(tileData[property][0] * 1000);
                 let hour = date.getUTCHours(date);
 
@@ -232,21 +240,21 @@ function populateForecast(data) {
                 time.innerHTML = convertTime(tileData[property][1], hour);
 
                 forecastTileMain.appendChild(time);
-            } else if (property == "Condition") {
+            } else if (property == "condition") {
                 const icon = document.createElement("img");
                 icon.classList.add("forecastIcon");
 
                 icon.src = `https://openweathermap.org/img/wn/${tileData[property][1]}@2x.png`;
 
                 forecastTileDisplay.appendChild(icon);
-            } else if (property == "Temperature") {
+            } else if (property == "temperature") {
                 const forecastTemp = document.createElement("div");
 
                 forecastTemp.innerHTML = `${tileData[property]}`;
 
                 forecastTileDisplay.appendChild(forecastTemp);
                 forecastTileMain.appendChild(forecastTileDisplay);
-            } else if (property == "Pop") {
+            } else if (property == "pop") {
                 const pop = document.createElement("div");
 
                 pop.innerHTML = `${tileData[property]} pop`;
@@ -265,7 +273,7 @@ function populateForecast(data) {
                 forecastItemProperty.classList.add("forecastItemProperty");
                 forecastItemData.classList.add("forecastItemData");
 
-                if (property == "Wind") {
+                if (property == "wind") {
                     forecastItemProperty.innerHTML = `${property}`;
                     forecastItemData.innerHTML = `${
                         tileData[property].speed
@@ -289,6 +297,7 @@ function populateForecast(data) {
             }
         }
 
+        // Creates btn to expand forecast
         const expandBtn = document.createElement("button");
         expandBtn.classList.add("expandBtn");
         expandBtn.innerHTML = "&#8964";
@@ -307,6 +316,7 @@ function populateForecast(data) {
 }
 
 function addError() {
+    // Displays error page when called
     const location = document.querySelector(".location");
     location.innerHTML = "";
 
@@ -323,6 +333,7 @@ function addError() {
 }
 
 function removeError() {
+    // Removes error page and returns to main page
     const outerWrappers = document.querySelectorAll(".outerWrapper");
     const errorWrapper = document.querySelector(".errorWrapper");
 
@@ -334,6 +345,7 @@ function removeError() {
 }
 
 function startLoadingAnimation() {
+    // Starts skeleton loading animation
     removeError();
 
     const conditionContainers = document.querySelectorAll(
@@ -351,6 +363,7 @@ function startLoadingAnimation() {
 }
 
 function endLoadingAnimation() {
+    // Ends skeleton loading animation
     const conditionContainers = document.querySelectorAll(
         ".conditionContainer"
     );
@@ -366,6 +379,67 @@ function endLoadingAnimation() {
     });
 }
 
+function search() {
+    // Sets up search funtionality of main search bar
+    const submitBtn = document.querySelector(".submitBtn");
+    submitBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const unitsBtn = document.querySelector(".unitsBtn");
+        const search = document.querySelector(".search");
+
+        if (search.value != "") {
+            if (unitsBtn.innerHTML == "Imperial Units") {
+                loadPage(search.value, "metric");
+            } else if (unitsBtn.innerHTML == "Metric Units") {
+                loadPage(search.value, "imperial");
+            } else {
+                loadPage(search.value, "metric");
+            }
+        }
+
+        search.value = "";
+    });
+}
+
+function convertUnits() {
+    // Sets up listener to convert units on btn click
+    const unitsBtn = document.querySelector(".unitsBtn");
+    const location = document.querySelector(".location");
+
+    unitsBtn.addEventListener("click", () => {
+        if (unitsBtn.innerHTML == "Imperial Units") {
+            unitsBtn.innerHTML = "Metric Units";
+            loadPage(location.innerHTML, "imperial", false);
+        } else {
+            unitsBtn.innerHTML = "Imperial Units";
+            loadPage(location.innerHTML, "metric", false);
+        }
+    });
+}
+
+/*
+// Code to implement google autocomplete (Need to set up billing to work)
+
+window.addEventListener("load", initialize);
+
+function initialize() {
+    const form = document.querySelector(".searchForm");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+    });
+
+    const search = document.querySelector(".search");
+    const autocomplete = new google.maps.places.Autocomplete(search);
+
+    autocomplete.addListener("place_changed", function () {
+        const place = autocomplete.getPlace();
+
+        loadPage(place.name);
+        search.value = "";
+    });
+}
+*/
+
 export {
     populateLocation,
     populateCurrentWeather,
@@ -374,4 +448,6 @@ export {
     addError,
     startLoadingAnimation,
     endLoadingAnimation,
+    search,
+    convertUnits,
 };
