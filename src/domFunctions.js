@@ -1,5 +1,5 @@
 // Functions to create and display DOM elements
-
+import { loadPage } from "./index";
 import {
     convertTime,
     convertWindDirection,
@@ -10,16 +10,12 @@ function populateLocation(data) {
     const location = document.querySelector(".location");
     location.innerHTML = "";
 
-    for (const property in data) {
-        if (property == "Location") {
-            let regionNames = new Intl.DisplayNames(["en"], {
-                type: "region",
-            });
-            let country = regionNames.of(`${data[property][1]}`);
+    let regionNames = new Intl.DisplayNames(["en"], {
+        type: "region",
+    });
 
-            location.innerHTML = `${data[property][0]}, ${country}`;
-        }
-    }
+    let country = regionNames.of(`${data.location[1]}`);
+    location.innerHTML = `${data.location[0]}, ${country}`;
 }
 
 function populateCurrentWeather(data) {
@@ -41,7 +37,7 @@ function populateCurrentWeather(data) {
     currentTemp.innerHTML = "";
 
     for (const property in data) {
-        if (property == "Date") {
+        if (property == "date") {
             const date = new Date(data[property][0] * 1000);
 
             const hour = date.getUTCHours(date);
@@ -50,10 +46,9 @@ function populateCurrentWeather(data) {
             const time = convertTime(data[property][1], hour, minute);
 
             currentTime.innerHTML = time;
-        } else if (property == "Temperature") {
+        } else if (property == "temperature") {
             currentTemp.innerHTML = `${data[property]}`;
-            // U+2109 for Fahrenheit
-        } else if (property == "Condition") {
+        } else if (property == "condition") {
             currentConditionName.innerHTML = `${capitalizeFirstLetters(
                 data[property][0]
             )}`;
@@ -68,7 +63,7 @@ function populateCurrentWeather(data) {
             const weatherItemData = document.createElement("div");
             weatherItemData.classList.add("weatherItemData");
 
-            if (property == "Location") {
+            if (property == "location") {
                 weatherItemProperty.innerHTML = `${property}`;
 
                 let regionNames = new Intl.DisplayNames(["en"], {
@@ -77,7 +72,7 @@ function populateCurrentWeather(data) {
                 let country = regionNames.of(`${data[property][1]}`);
 
                 weatherItemData.innerHTML = `${data[property][0]}, ${country}`;
-            } else if (property == "Wind") {
+            } else if (property == "wind") {
                 weatherItemProperty.innerHTML = `${property}`;
                 weatherItemData.innerHTML = `${
                     data[property][0]
@@ -224,7 +219,7 @@ function populateForecast(data) {
         let tileData = data[i];
 
         for (const property in tileData) {
-            if (property == "Date") {
+            if (property == "date") {
                 let date = new Date(tileData[property][0] * 1000);
                 let hour = date.getUTCHours(date);
 
@@ -232,21 +227,21 @@ function populateForecast(data) {
                 time.innerHTML = convertTime(tileData[property][1], hour);
 
                 forecastTileMain.appendChild(time);
-            } else if (property == "Condition") {
+            } else if (property == "condition") {
                 const icon = document.createElement("img");
                 icon.classList.add("forecastIcon");
 
                 icon.src = `https://openweathermap.org/img/wn/${tileData[property][1]}@2x.png`;
 
                 forecastTileDisplay.appendChild(icon);
-            } else if (property == "Temperature") {
+            } else if (property == "temperature") {
                 const forecastTemp = document.createElement("div");
 
                 forecastTemp.innerHTML = `${tileData[property]}`;
 
                 forecastTileDisplay.appendChild(forecastTemp);
                 forecastTileMain.appendChild(forecastTileDisplay);
-            } else if (property == "Pop") {
+            } else if (property == "pop") {
                 const pop = document.createElement("div");
 
                 pop.innerHTML = `${tileData[property]} pop`;
@@ -265,7 +260,7 @@ function populateForecast(data) {
                 forecastItemProperty.classList.add("forecastItemProperty");
                 forecastItemData.classList.add("forecastItemData");
 
-                if (property == "Wind") {
+                if (property == "wind") {
                     forecastItemProperty.innerHTML = `${property}`;
                     forecastItemData.innerHTML = `${
                         tileData[property].speed
@@ -366,6 +361,42 @@ function endLoadingAnimation() {
     });
 }
 
+function search() {
+    const submitBtn = document.querySelector(".submitBtn");
+    submitBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const unitsBtn = document.querySelector(".unitsBtn");
+        const search = document.querySelector(".search");
+
+        if (search.value != "") {
+            if (unitsBtn.innerHTML == "Imperial Units") {
+                loadPage(search.value, "metric");
+            } else if (unitsBtn.innerHTML == "Metric Units") {
+                loadPage(search.value, "imperial");
+            } else {
+                loadPage(search.value, "metric");
+            }
+        }
+
+        search.value = "";
+    });
+}
+
+function convertUnits() {
+    const unitsBtn = document.querySelector(".unitsBtn");
+    const location = document.querySelector(".location");
+
+    unitsBtn.addEventListener("click", () => {
+        if (unitsBtn.innerHTML == "Imperial Units") {
+            unitsBtn.innerHTML = "Metric Units";
+            loadPage(location.innerHTML, "imperial", false);
+        } else {
+            unitsBtn.innerHTML = "Imperial Units";
+            loadPage(location.innerHTML, "metric", false);
+        }
+    });
+}
+
 export {
     populateLocation,
     populateCurrentWeather,
@@ -374,4 +405,6 @@ export {
     addError,
     startLoadingAnimation,
     endLoadingAnimation,
+    search,
+    convertUnits,
 };
