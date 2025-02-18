@@ -12,6 +12,7 @@ A weather forecast site developed as part of The ODIN Project javascript curricu
 
 -   Display's current weather, air quality, and 24hr forecast for a specified city on a clean user interface.
 -   Utilizing APIs and fetch to gather relevent data.
+-   Site is bundled using webpack.
 -   Autocomplete search functionality.
 
 ## Technologies Used
@@ -20,7 +21,3 @@ A weather forecast site developed as part of The ODIN Project javascript curricu
 -   APIs (OpenWeather)
 -   Webpack
 -   HTML/CSS
-
-## TODO
-
--   Add functionality to convert units
