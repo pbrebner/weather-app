@@ -8,7 +8,9 @@
         "watch": "webpack --watch",
         "build": "webpack",
         "dev": "webpack serve",
-        "deploy": "git subtree push --prefix dist origin gh-pages"
+        "merge": "git checkout gh-pages && git merge main --no-edit",
+        "prep": "git add dist -f && commit -m 'Deployment commit' & git subtree push --prefix dist origin gh-pages & git checkout main",
+        "deploy": "npm run merge & npm run build & npm run prep"
     },
     "repository": {
         "type": "git",
