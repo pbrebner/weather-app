@@ -1,8 +1,8 @@
 // Functions to fetch weather data through API
 
-async function getWeather(location) {
+async function getWeather(location, units) {
     const weatherResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&APPID=69a0fe9d89aa3c562c09a50fbd505046`
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&APPID=69a0fe9d89aa3c562c09a50fbd505046`
     );
 
     const weatherData = await weatherResponse.json();
@@ -10,9 +10,9 @@ async function getWeather(location) {
     return weatherData;
 }
 
-async function getAirQuality(location) {
+async function getAirQuality(location, units) {
     const weatherResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&APPID=69a0fe9d89aa3c562c09a50fbd505046`
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&APPID=69a0fe9d89aa3c562c09a50fbd505046`
     );
     const weatherData = await weatherResponse.json();
 
@@ -28,9 +28,9 @@ async function getAirQuality(location) {
     return airQualityData;
 }
 
-async function getForecast(location) {
+async function getForecast(location, units) {
     const forecastResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=69a0fe9d89aa3c562c09a50fbd505046`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=${units}&appid=69a0fe9d89aa3c562c09a50fbd505046`
     );
 
     const forecastData = await forecastResponse.json();
